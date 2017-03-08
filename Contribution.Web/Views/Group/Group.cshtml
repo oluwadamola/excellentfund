@@ -1,0 +1,157 @@
+﻿<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.list">Groups</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>{{model.Group.GroupName}}</span>
+        </li>
+    </ul>
+
+    <ul class="page-breadcrumb pull-right">
+        <li>
+            System Administrator
+        </li>
+    </ul>
+</div>
+
+<h1 class="page-title">
+    <i class="fa fa-certificate font-yellow-casablanca"></i> Group Details
+    <small></small>
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <span class="caption-subject font-green-seagreen bold uppercase">
+                        <i class="fa fa-info" style="margin:0px;"></i>
+                        Group Info
+                    </span>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-circle btn-icon-only btn-default"
+                            data-toggle="tooltip"
+                            title="Edit"
+                            ng-click="model.editGroup()">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="bold">Code</td>
+                        <td>{{model.Group.GroupId}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{model.Group.GroupName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="portlet light bordered">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-xs-12 user"
+                     ui-sref="groups.users({ gid: model.Group.GroupId })">
+                    <div class="pane pane-hover" style="border-radius:5px; border:none">
+                        <div class="cursor-pointer">
+                            <i class="fa fa-pencil font-purple-studio fa-5x"></i>
+                            <h3>Users</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4 col-xs-12 user"
+                     ui-sref="groups.contributors({ gid: model.Group.GroupId })">
+                    <div class="pane pane-hover" style="border-radius:5px; border:none">
+                        <div class="cursor-pointer">
+                            <i class="fa fa-square font-green-seagreen fa-5x"></i>
+                            <h3>Contributions</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-sm-4 col-xs-12 user"
+                     ui-sref="groups.collectors({ gid: model.Group.GroupId })">
+                    <div class="pane pane-hover" style="border-radius:5px; border:none">
+                        <div class="cursor-pointer">
+                            <i class="fa fa-users font-green-seagreen fa-5x"></i>
+                            <h3>Collectors</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="user.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add User</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" class="form-horizontal" ng-submit="model.Ok(model.User)">
+            <div class="form-body">
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_role">User</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="form_role" ng-init="model.User = model.Users[0]" ng-model="model.User" ng-options="role.Title for user.Code in model.Users"></select>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn default" ng-click="model.Cancel()">Cancel</button>
+        <button class="btn blue" ng-click="model.Ok(model.User)">OK</button>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="group.html">
+    <form name="form" role="form" class="form-horizontal" ng-submit="model.Ok(form)">
+        <div class="modal-header">
+            <h3 class="modal-title"><i class="fa fa-certificate font-yellow-casablanca"></i> {{model.Title}}</h3>
+            {{model.Group}}
+        </div>
+        <div class="modal-body">
+
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_code">Code</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_code" ng-model="model.Group.GroupId" placeholder="Edit Group Id" required />
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_title">Title</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_title" ng-model="model.Group.GroupName" placeholder="Edit Group Name" required />
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn default" type="reset" ng-click="model.Cancel()">Cancel</button>
+            <button class="btn blue" type="submit">OK</button>
+        </div>
+    </form>
+</script>

@@ -1,0 +1,163 @@
+﻿/** View Animation **/
+.view-frame.ng-enter {
+    -webkit-transition: linear all 0.3s;
+    -moz-transition: linear all 0.3s;
+    -o-transition: linear all 0.3s;
+    transition: linear all 0.3s;
+    opacity: 0;
+}
+
+    .view-frame.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+
+
+div[data-loader] {
+    margin: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    color: #808080;
+    right: 0;
+    height: 70px;
+    width: 70px;
+    display: none;
+    z-index: 1100;
+    text-align: center;
+}
+
+.pane {
+    border-radius: 5px;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+    .pane h4 {
+        font-size: 15px;
+    }
+
+    .pane i.fa{
+        line-height:1em;
+    }
+
+.pane-sm {
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+}
+
+.pane-hover:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.fa {
+    margin-right: 7px;
+}
+
+.page-actions {
+    margin-top: 15px;
+}
+
+#toast-container {
+    margin-top: 40px;
+}
+
+
+/* Extra Small */
+@media (max-width: 767px) {
+    .page-actions {
+        margin-top: 20px;
+    }
+
+    #toast-container {
+        margin-top: 92px;
+    }
+}
+
+/* Small */
+@media (min-width: 768px) and (max-width: 991px) {
+    .page-actions {
+        margin-top: 22px;
+    }
+}
+
+/* Medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .page-actions {
+        margin-top: 20px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .page-actions {
+        margin-top: 20px;
+    }
+}
+
+
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 18.5%;
+    z-index: 1050;
+    width: 80%;
+    height: 80%;
+    margin-left: -10%;
+}
+
+.page-logo a, .page-logo a:hover {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+    .page-logo a span {
+        color: #d64635;
+    }
+
+
+.page-breadcrumb span {
+    cursor: default;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px 10px;
+}
+
+.mt-comments 
+.mt-comment 
+.mt-comment-img > i.fa {
+    margin: 20px 10px 30px;
+    font-size: 45px;
+}
+
+.mt-comments .mt-comment .mt-comment-img{
+    width:60px;
+    float:left;
+}
+
+
+tr.overflow td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-bold{
+    font-weight:bold !important;
+}

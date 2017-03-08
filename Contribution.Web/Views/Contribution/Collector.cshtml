@@ -1,0 +1,138 @@
+﻿<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.list">Groups</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.details({id: model.Group.GroupId})">{{model.Group.GroupName}}</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.users({ gid: model.Group.GroupId })">Collectors</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>{{model.User.UserId}}</span>
+        </li>
+    </ul>
+
+    <ul class="page-breadcrumb pull-right">
+        <li>
+            System Administrator
+        </li>
+    </ul>
+</div>
+
+<h1 class="page-title">
+    <i class="fa fa-user font-yellow-casablanca"></i> Collector Details
+    <small></small>
+</h1>
+<div class="row">
+    <div class="col-md-3">
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <span class="caption-subject font-green-seagreen bold uppercase">
+                        <i class="fa fa-info" style="margin:0px;"></i>
+                        Group Info
+                    </span>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-circle btn-icon-only btn-default"
+                            data-toggle="tooltip"
+                            title="Edit"
+                            ng-click="model.editGroup()">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="bold">Code</td>
+                        <td>{{model.Group.GroupId}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{model.Group.GroupName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="col-md-7">
+
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <span class="caption-subject font-green-seagreen bold uppercase">
+                        <i class="fa fa-user" style="margin:0px;"></i>
+                        User
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td class="bold">Title</td>
+                                <td>{{model.User.Title}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="bold">Gender </td>
+                                <td>{{model.User.Gender}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td class="bold">First Name</td>
+                                <td>{{model.User.FirstName}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="bold">Last Name  </td>
+                                <td>{{model.User.LastName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-icon right">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <td>{{model.User.PhoneNumber}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>{{model.User.Email}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

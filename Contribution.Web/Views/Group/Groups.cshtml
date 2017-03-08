@@ -1,0 +1,102 @@
+﻿<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE BAR -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Groups</span>
+        </li>
+    </ul>
+    <ul class="page-breadcrumb pull-right">
+        <li>
+            System Administrator
+        </li>
+    </ul>
+</div>
+<!-- END PAGE BAR -->
+<!-- BEGIN PAGE TITLE-->
+<div class="row">
+    <div class="col-xs-6">
+        <h1 class="page-title">
+            <i class="fa fa-certificate font-yellow-casablanca"></i>Groups
+        </h1>
+    </div>
+    <div class="col-xs-6">
+        <div class="page-actions">
+            <button ng-click="model.add()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>New Group</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<!-- BEGIN : USER CARDS -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="mt-element-card mt-card-round mt-element-overlay">
+                <div class="row">
+                    <div class="col-md-12" ng-hide="model.Groups.length">
+                        <p class="empty">There are no groups available yet</p>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-4 col-xs-12 user"
+                         ui-sref="groups.details({id: group.GroupId})"
+                         ng-show="model.Groups.length"
+                         ng-repeat="group in model.Groups">
+                        <div class="pane pane-hover" ui-sref="groups.details({ id: group.GroupId })" style="border-radius:5px; border:none">
+                            <div class="cursor-pointer">
+                                <i class="fa fa-certificate font-yellow-casablanca fa-5x"></i>
+                                <h3>{{group.GroupName}}</h3>
+                                <small>{{group.GroupName}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="view-frame" ui-view></div>
+<!-- END : USER CARDS -->
+
+<style>
+    @@media (min-width: 1200px) {
+        .user {
+            max-width: 300px;
+        }
+    }
+</style>
+
+
+<script type="text/ng-template" id="group.html">
+    <form name="form" role="form" class="form-horizontal" ng-submit="model.Ok(form,model.Group)">
+        <div class="modal-header">
+            <h3 class="modal-title">{{model.Title}}</h3>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_code">Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_code" ng-model="model.Group.GroupName" placeholder="Enter Group Name" required />
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn default" type="reset" ng-click="model.Cancel()">Cancel</button>
+            <button class="btn blue" type="submit">OK</button>
+        </div>
+    </form>
+</script>

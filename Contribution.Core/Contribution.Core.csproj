@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5A41C839-4738-4EBB-AE17-8A3AC8B84C78}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Contribution.Core</RootNamespace>
+    <AssemblyName>Contribution.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Operation">
+      <HintPath>..\packages\Operation.1.0.8\lib\net45\Operation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\CollectorModel.cs" />
+    <Compile Include="Business\ContributeModel.cs" />
+    <Compile Include="Business\GroupModel.cs" />
+    <Compile Include="Business\Model.cs" />
+    <Compile Include="Business\MonthModel.cs" />
+    <Compile Include="Business\ProfileModel.cs" />
+    <Compile Include="Business\RoleModel.cs" />
+    <Compile Include="Business\UserModel.cs" />
+    <Compile Include="Business\YearModel.cs" />
+    <Compile Include="Entities\Collector.cs" />
+    <Compile Include="Entities\Contribute.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\UserGroup.cs" />
+    <Compile Include="Entities\Month.cs" />
+    <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Entities\Year.cs" />
+    <Compile Include="Interface\Data\ICollectorManager.cs" />
+    <Compile Include="Interface\Data\IContributionManager.cs" />
+    <Compile Include="Interface\Data\IDataRepository.cs" />
+    <Compile Include="Interface\Data\IEntityRepository.cs" />
+    <Compile Include="Interface\Data\IGroupManager.cs" />
+    <Compile Include="Interface\Data\IUserManager.cs" />
+    <Compile Include="Manager\CollectorManager.cs" />
+    <Compile Include="Manager\ContributionManager.cs" />
+    <Compile Include="Manager\GroupManager.cs" />
+    <Compile Include="Manager\UserManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contribution.Infrastructure\Contribution.Infrastructure.csproj">
+      <Project>{66014ef5-4a4a-4ced-af5a-9d8a8e681680}</Project>
+      <Name>Contribution.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

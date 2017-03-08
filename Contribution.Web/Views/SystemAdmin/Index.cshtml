@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "System Administration - Conntribution Service";
+}
+
+
+@section head{
+    <link href="~/Content/Theme/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" />
+    <link href="~/Content/Theme/assets/pages/css/profile.min.css" rel="stylesheet" />
+    <link href="~/Content/Theme/assets/pages/css/pricing.min.css" rel="stylesheet" />
+}
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- BEGIN SIDEBAR -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+            <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+            <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+            <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <li class="sidebar-toggler-wrapper hide">
+                    <div class="sidebar-toggler">
+                        <span></span>
+                    </div>
+                </li>
+
+                <li class="heading">
+                    <h3 class="uppercase">Menu</h3>
+                </li>
+
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+                <li class="nav-item start" ui-sref-active="active">
+                    <a ui-sref="home" class="nav-link">
+                        <i class="icon-home"></i>
+                        <span class="title">Dashboard</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="nav-item" ui-sref-active="active">
+                    <a ui-sref="users" class="nav-link">
+                        <i class="fa fa-users"></i>
+                        <span class="title">Users</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+                <li class="nav-item" ui-sref-active="active">
+                    <a ui-sref="profile" class="nav-link">
+                        <i class="fa fa-user"></i>
+                        <span class="title">Profile</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item" ui-sref-active="active">
+                    <a ui-sref="groups" class="nav-link">
+                        <i class="fa fa-user"></i>
+                        <span class="title">Groups</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- END SIDEBAR MENU -->
+            <!-- END SIDEBAR MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content view-frame" ui-view></div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+
+@section scripts{
+    <script src="~/Content/Theme/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+
+    <!-- Application -->
+    <script src="~/Scripts/app/sysadmin/app.js"></script>
+
+    <!-- Infrastructure Module -->
+    <script src="~/Scripts/app/infrastructure/modules.js"></script>
+    <script src="~/Scripts/app/infrastructure/controllers.js"></script>
+
+    <!-- Profile Module -->
+    <script src="~/Scripts/app/profile/app.js"></script>
+    <script src="~/Scripts/app/profile/controllers.js"></script>
+
+    <!-- Group Module -->
+    <script src="~/Scripts/app/group/app.js"></script>
+    <script src="~/Scripts/app/group/controllers.js"></script>
+
+    <!-- Utils -->
+    <script src="~/Scripts/app/infrastructure/utils/constants.js"></script>
+    <script src="~/Scripts/app/infrastructure/utils/Interceptors.js"></script>
+    <script src="~/Scripts/app/infrastructure/directives.js"></script>
+
+    <!-- Services -->
+    <script src="~/Scripts/app/infrastructure/services/domain.js"></script>
+    <script src="~/Scripts/app/infrastructure/services/notify.js"></script>
+    <script src="~/Scripts/app/infrastructure/services/storage.js"></script>
+    <script src="~/Scripts/app/infrastructure/services/file.js"></script>
+    <script src="~/Scripts/app/infrastructure/services/http.js"></script>
+
+    <!-- Controllers -->
+    <script src="~/Scripts/app/sysadmin/controllers.js"></script>
+}

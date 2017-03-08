@@ -1,0 +1,67 @@
+﻿<!-- BEGIN PAGE BAR -->
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Profile</span>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE BAR -->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    User Profile
+    <small></small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet bordered">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img ng-src="{{model.User.ImageUrl}}?s=150" ng-show="model.User.ImageUrl" class="img-responsive" />
+                    <img src="~/content/Images/default-user.png" ng-hide="model.User.ImageUrl" class="img-responsive" />
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> {{model.User.FirstName}} {{model.User.LastName}} </div>
+                    <div class="profile-usertitle-job"> {{model.Roles[0].Title}} </div>
+                </div>
+                <p>&nbsp;</p>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li ui-sref-active="active">
+                            <a ui-sref="profile.overview">
+                                <i class="icon-home"></i> Overview
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="profile.account">
+                                <i class="icon-user"></i> Account
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
+            </div>
+
+            <!-- END PORTLET MAIN -->
+        </div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content view-frame" ui-view></div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+<!-- END CONTENT BODY -->

@@ -1,0 +1,166 @@
+﻿<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE BAR -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Users</span>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+
+    </div>
+</div>
+<!-- END PAGE BAR -->
+<!-- BEGIN PAGE TITLE-->
+<div class="row">
+    <div class="col-xs-6">
+        <h1 class="page-title">
+            <i class="fa fa-users"></i>Users
+        </h1>
+    </div>
+    <div class="col-xs-6">
+        <div class="page-actions">
+            <button ng-click="model.Add()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>Add User</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<!-- BEGIN : USER CARDS -->
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="portlet light bordered">
+            <div class="mt-element-card mt-card-round mt-element-overlay">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-xs-12 user" ng-repeat="user in model.Users" ng-click="model.Select(user)">
+                        <div class="mt-card-item pane-hover" style="border-radius:5px; border:none">
+                            <div class="mt-card-avatar mt-overlay-1 cursor-pointer">
+                                <img ng-src="{{user.ImageUrl}}?s=150" ng-show="user.ImageUrl" />
+                                <img src="~/content/Images/default-user.png" ng-hide="user.ImageUrl" />
+                            </div>
+                            <div class="mt-card-content">
+                                <h3 class="mt-card-name">{{user.FullName}}</h3>
+                                <p class="mt-card-desc font-grey-mint">{{user.Email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="view-frame" ui-view></div>
+<!-- END : USER CARDS -->
+
+<style>
+    @@media (min-width: 1200px) {
+        .user {
+            max-width: 300px;
+        }
+    }
+</style>
+
+
+<script type="text/ng-template" id="addUser.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Add User</h3>
+    </div>
+    <div class="modal-body">
+        <form name="form" role="form" class="form-horizontal" ng-submit="model.Ok(form,model.User)">
+            <div class="form-body">
+
+
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_firstname">First Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_firstname" ng-model="model.User.FirstName" placeholder="Enter First Name" required />
+                        <span class="help-block">Enter FirstName</span>
+                        <i class="fa fa-star highlight"></i>
+                    </div>
+                    </div>
+
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_lastname">Last Name</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_lastname" ng-model="model.User.LastName" placeholder="Enter Last Name" required />
+                        <i class="fa fa-star highlight"></i>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_phonenumber">Phone Number</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="form_phonenumber" ng-model="model.User.PhoneNumber" placeholder="Enter Phone Number" required/>
+                    </div>
+                </div>
+
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_email">Email</label>
+                    <div class="col-md-7">
+                        <input type="email" class="form-control" id="form_email" placeholder="Enter Email Address" required
+                               ng-model="model.User.Email"  pattern="^\w+[\w-\.]*\@("@")\w+((-\w+)|(\w*))(\.[a-z]{2,3})+$" />
+                        <i class="fa fa-star highlight"></i>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_password">Password</label>
+                    <div class="col-md-7">
+                        <input type="password" class="form-control" id="form_password" placeholder="Enter Password"
+                                ng-model="model.User.Password" Password />                      
+                        <span class="help-block">Enter Password (At least 8 characters)</span>
+                        <i class="fa fa-star highlight"></i>
+                    </div>
+                </div>
+
+               <div class="form-group form-md-line-input">
+                   <label class="col-md-3 control-label" for="form_confirmpassword">Confirm Password</label>
+                   <div class="col-md-7">
+                       
+                           <input type="password" class="form-control" id="form_confirmpassword" placeholder="Enter Password"
+                                  ng-model="model.ConfirmPassword" Password />
+                           <span class="help-block">Confirm Password</span>
+                           <i class="fa fa-star highlight"></i>
+                       </div>
+                   </div>
+
+                @*<div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_email">Email</label>
+                    <div class="col-md-7">
+                        <input type="email" class="form-control" id="form_email" ng-model="model.User.Email" placeholder="Enter Email Address" required />
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>*@
+
+                @*<div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_role">Role</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="form_role" ng-init="model.User.Role = model.Roles[0]" ng-model="model.User.Role" ng-options="role.Title for role in model.Roles"></select>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>*@
+            </div>
+            <button class="btn blue">OK</button>
+        </form>
+
+        <div class="modal-footer">
+            <button class="btn default" ng-click="model.Cancel()">Cancel</button>
+        </div>
+    </div>
+
+</script>

@@ -1,0 +1,46 @@
+﻿<style>
+    .thumbnail {
+        width: 300px;
+        height: 300px;
+        display: inline-block;
+    }
+
+        .thumbnail .display {
+            height: 100%;
+            width: 100%;
+            background-position: center;
+        }
+</style>
+
+<form action="#" role="form">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="thumbnail">
+                <div ng-show="model.Image" class="display" background-image="{{model.Image}}"></div>
+                <img ng-hide="model.Image" class="img-responsive preview" src="~/Content/Images/default-user.png" alt="">
+            </div>
+            <p class="text-center"><i class="fa fa-info"></i>Images will be cut into a Square</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="fileinput fileinput-new" style="display:inline-block" data-provides="fileinput">
+                <div class="input-group input-large text-left">
+                    <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                        <span class="fileinput-filename"> </span>
+                    </div>
+                    <span class="input-group-addon btn default btn-file">
+                        <span class="fileinput-new"> Select file </span>
+                        <span class="fileinput-exists"> Change </span>
+                        <input type="file" file-model="file" file-change="model.SelectImage(file)" name="...">
+                    </span>
+                    <a ng-click="model.SelectImage()" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="margin-top-10 text-right">
+        <a ng-click="model.UploadImage(file)" class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Upload and Save </a>
+    </div>
+</form>

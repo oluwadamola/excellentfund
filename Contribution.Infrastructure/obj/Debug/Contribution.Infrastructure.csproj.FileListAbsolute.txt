@@ -1,0 +1,6 @@
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Infrastructure.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Infrastructure.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Operation.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.csprojResolveAssemblyReference.cache
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.pdb

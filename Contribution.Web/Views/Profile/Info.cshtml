@@ -1,0 +1,56 @@
+﻿<form role="form" ng-submit="model.SaveInfo()" ng-keypress="model.KeyPress($event)" method="post">
+    <div class="form-body">
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group form-md-line-input">
+                    <div class="input-icon right">
+                        <input type="text" class="form-control" id="form_firstname" ng-model="model.User.FirstName" required />
+                        <label for="form_firstname">First Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-md-line-input">
+                    <div class="input-icon right">
+                        <input type="text" class="form-control" id="form_lastname" ng-model="model.User.LastName" required />
+                        <label for="form_lastname">Last Name</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <div class="form-group form-md-line-input">
+                    <div class="input-icon right">
+                        <select class="form-control" id="form_title" ng-model="model.User.Title" ng-options="title for title in model.Titles"></select>
+                        <label for="form_title">Select Title</label>
+                    </div>
+                </div>
+            </div>
+
+
+            @*<!-- Sort out Intl Phone Number Validation Later-->
+                <div class="col-sm-6">
+                    <div class="form-group form-md-line-input">
+                        <input type="text" class="form-control" id="form_phonenumber" ng-model="model.User.PhoneNumber" required />
+                        <label for="form_phonenumber">Phone Number</label>
+                        <span class="help-block">Enter Phone Number</span>
+                    </div>
+                </div>*@
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-4">
+                <button class="btn btn-default" type="button" ng-click="model.Reset()"><i class="fa fa-refresh"></i>Reset</button>
+            </div>
+            <div class="col-xs-8" style="text-align:right">
+                <button class="btn green-meadow" type="submit">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</form>

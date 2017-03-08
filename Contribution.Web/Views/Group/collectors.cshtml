@@ -1,0 +1,110 @@
+﻿<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.list">Groups</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="groups.details({id: model.Group.GroupId})">{{model.Group.GroupName}}</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Collectors</span>
+        </li>
+    </ul>
+
+    <ul class="page-breadcrumb pull-right">
+        <li>
+            System Administrator
+        </li>
+    </ul>
+</div>
+
+<div>
+    <div class="col-xs-6">
+        <h1 class="page-title">
+            <i class="fa fa-hand-lizard-o font-purple-studio"></i> Collectors
+        </h1>
+    </div>
+    <div class="col-xs-6">
+        <div class="page-actions">
+            <button class="btn purple pull-right"
+                    ng-click="model.addCollector()">
+                <i class="fa fa-plus"></i> Add Collector To Group
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <table class="table" ng-show="model.Collectors.length">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>UserId</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                          <th>Month</th>
+                          <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="overflow" ng-repeat="collector in model.Collectors">
+                        <td>{{$index + 1}}</td>
+                        <td>{{collector.UserId}}</td>
+                        <td>{{collector.FirstName || "N/A"}}</td>
+                        <td>{{collector.LastName || "N/A"}}</td>
+                        <td>{{collector.MonthName || "N/A"}}</td>
+                        <td>{{collector.Email || "N/A"}}</td>
+                        <td class="text-right">
+                            <a ui-sref="groups.user.details({ gid: model.Group.GroupId, id: user.UserId })" class="btn btn-default btn-xs"><i class="fa fa-search"></i>View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="empty" ng-hide="model.Collectors.length">
+                There are no Users Available in this group yet
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="collector.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Assign Collector to Group</h3>
+    </div>
+    <div class="modal-body">
+        <form name="form" role="form" class="form-horizontal" ng-submit="model.Ok(form,model.Collector)">
+            <div class="form-body">
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_user">User</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="form_user" ng-init="model.User = model.Users[0]" ng-model="model.Collector.User" ng-options="user.FirstName + ' ' + user.LastName for user in model.Users" required></select>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_month">Month</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="form_month" ng-init="model.Month = model.Months[0]" ng-model="model.Collector.Month" ng-options="month.MonthName for month in model.Months" required></select>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn default" ng-click="model.Cancel()">Cancel</button>
+                    <button class="btn blue">OK</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</script>

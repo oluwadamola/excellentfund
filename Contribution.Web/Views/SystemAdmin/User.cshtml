@@ -1,0 +1,133 @@
+﻿<!-- BEGIN PAGE BAR -->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="users.list">Users</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>Profile</span>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE BAR -->
+<!-- BEGIN PAGE TITLE-->
+<h1 class="page-title">
+    User Profile
+    <small></small>
+</h1>
+<!-- END PAGE TITLE-->
+<!-- END PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet bordered ">
+                <!-- SIDEBAR USERPIC -->
+                <div class="profile-userpic">
+                    <img ng-src="{{model.User.ImageUrl}}?s=150" ng-show="model.User.ImageUrl" class="img-responsive" />
+                    <img src="~/content/Images/default-user.png" ng-hide="model.User.ImageUrl" class="img-responsive" />
+                </div>
+                <!-- END SIDEBAR USERPIC -->
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> {{model.User.FirstName}} {{model.User.LastName}} </div>
+                    <div class="profile-usertitle-job"> {{model.Roles[0].Title}} </div>
+                </div>
+                <p>&nbsp;</p>
+                <!-- END SIDEBAR USER TITLE -->
+            </div>
+            <!-- END PORTLET MAIN -->
+        </div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- BEGIN PORTLET -->
+                    <div class="portlet light bordered ">
+                        <div class="portlet-title">
+                            <div class="caption caption-md">
+                                <i class="icon-bar-chart theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Roles</span>
+                                <span class="caption-helper hide">weekly stats...</span>
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                    <button ng-click="model.AddRole()" class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+                                        Add Role
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="table-scrollable table-scrollable-borderless">
+                                <div class="col-md-6" ng-repeat="role in model.Roles">
+                                    <div class="pane pane-hover">
+                                        <i class="fa fa-users fa-4x"></i>
+                                        <p style="margin-top:20px">{{role.Title}}</p>
+                                        <a ng-click="model.RemoveRole(role)"
+                                           class="btn btn-transparent red btn-circle btn-sm active">
+                                            Remove Role
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET -->
+                </div>
+
+            </div> 
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>
+<!-- END CONTENT BODY -->
+
+
+<script type="text/ng-template" id="role.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Assign Role</h3>
+    </div>
+    <div class="modal-body">
+        <form name="form" role="form" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_role">Role</label>
+                    <div class="col-md-7">
+                        <select class="form-control" id="form_role" ng-init="model.Role = model.Roles[0]" ng-model="model.Role" ng-options="role.RoleName for role in model.Roles"></select>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="modal-footer">
+            <button class="btn default" ng-click="model.Cancel()">Cancel</button>
+            <button class="btn blue" ng-click="model.Ok(form,model.Role)">OK</button>
+        </div>
+    </div>
+
+</script>
+
+
+
+<script type="text/ng-template" id="remove-role.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Remove Role?</h3>
+    </div>
+    <div class="modal-body">
+        Are you sure you want to remove <strong>{{model.User.FirstName}} {{model.User.LastName}}</strong> from <strong>{{model.Role.Title}}</strong> role?
+    </div>
+    <div class="modal-footer">
+        <button class="btn default" ng-click="model.Cancel()">Cancel</button>
+        <button class="btn blue" ng-click="model.Ok()">OK</button>
+    </div>
+</script>
