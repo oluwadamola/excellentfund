@@ -21,7 +21,6 @@ module Stev.Account.Controllers {
 
         Roles: {}[];
         UserId: number;
-        Userstrg: UserModel;
 
         user: Services.Domain.User;
         notify: Services.NotifyService;
@@ -39,46 +38,26 @@ module Stev.Account.Controllers {
 
         SignIn() {
             //Validate User
-            debugger;
-            let user = this.storage.User    //Get Role from Storage
+
             var signIn = this.user
                 .signIn(this.User.Email, this.User.Password)
-                .then(u =>
-                {
+                .then(u => {
                     this.user.getRoles(u.UserId).then(r => {
                         this.Redirect(r),
-
-                            //Initialize User
-                            /*this.Userstrg =
-                            {
-                                UserId: this.storage.User.UserId,
-                                Email: this.storage.User.Email,
-                                Title: this.storage.User.Title,
-                                Roles: r,
-                                FirstName: this.storage.User.FirstName,
-                                LastName: this.storage.User.LastName,
-                                ImageUrl: this.storage.User.ImageUrl,
-                                FullName: this.storage.User.FullName 
-                            }*/
-                            //this.User.Roles = r;
-                            //Add User Role
-
-                            user.Roles = r;
-                        this.storage.User = user;       //Save Role to Storage
+                            u.Roles = r;
+                        this.storage.User = u;       //Save Role to Storage
                     }),
-                    this.UserId = u.UserId
+                        this.UserId = u.UserId
                 })
                 .catch(err => this.notify.error(err));
         }
 
 
         Redirect(roles: RoleModel[]) {
-            debugger;
             if (!roles.length) {
                 this.notify.error("No Role found, Please Contact your Administrator");
             }
             else if (roles.length == 1) {
-                debugger;
                 //Redirect to Challenge Area
                 var role = this.user.getRole(roles[0].RoleName);
                 document.location.href = role.Url;

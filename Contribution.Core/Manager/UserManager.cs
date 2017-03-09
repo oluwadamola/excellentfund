@@ -29,13 +29,11 @@ namespace Contribution.Core.Manager
                 var user = _db.Query<User>().Where(u => u.Email == model.Email).FirstOrDefault();
                 if (user != null) throw new Exception("Email Address Already Exist");
 
-                //Create User Record and Encrypt Password
                 user = model.Create();
-                //user.Password = _enc.Encrypt(user.Password);
                 user.Password = model.Password;
                 _db.Add<User>(user);
 
-                var roleId = _db.Query<Role>().Where(r => r.RoleName == "SystemAdministrator").Select(r => r.RoleId).FirstOrDefault();
+                var roleId = _db.Query<Role>().Where(r => r.RoleName == AppRole.User.ToString()).Select(r => r.RoleId).FirstOrDefault();
                 AddRoleToUser(model, roleId);
 
                 _db.SaveChanges().Throw();
@@ -234,8 +232,8 @@ namespace Contribution.Core.Manager
                 var user = GetUserById(userId);
                 if (user == null) throw new Exception("Invalid Username/Email");
 
-                user.Password = newpassword; //_hasher.ComputeHash(newpassword, null);
-                var entity = _db.Update(user); //.Throw();
+                user.Password = newpassword; 
+                var entity = _db.Update(user); 
                 _db.SaveChanges().Throw();
             });
         }
@@ -263,7 +261,7 @@ namespace Contribution.Core.Manager
                 var croppedImage = Crop(data, 300, 300);
 
                 var virtualPath = "~/content/images";
-                var physicalPath = HttpContext.Current.Server.MapPath(virtualPath);                     // Translate to Physical Path C:\...
+                var physicalPath = HttpContext.Current.Server.MapPath(virtualPath);  // Translate to Physical Path C:\...
 
                 var fileName = user.UserId + ".jpg";
                 if (!Directory.Exists(physicalPath)) Directory.CreateDirectory(physicalPath);

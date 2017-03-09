@@ -26,7 +26,6 @@ namespace Contribution.Core.Interface.Manager
 
                 var entity = new Group { GroupName = model.GroupName };
 
-                // save the new record into db
                 _repo.Add<Group>(entity);
                 _repo.SaveChanges();
 
@@ -145,12 +144,23 @@ namespace Contribution.Core.Interface.Manager
                 _repo.Add<UserGroup>(entity);
                 _repo.SaveChanges().Unwrap();
 
-                var userid = _repo.Query<UserGroup>().Where(ug => ug.UserGroupId == groupId).Select(ug => ug.UserId).ToList();
-                var users = _repo.Query<User>().Where(u => userid.Contains(u.UserId)).ToList();
+                var userids = _repo.Query<UserGroup>().Where(ug => ug.UserGroupId == groupId).Select(ug => ug.UserId).ToList();
+                var users = _repo.Query<User>().Where(u => userids.Contains(u.UserId)).ToList();
                 var usermodel = users.Select(u => new UserModel(u)).ToArray();
 
                 return usermodel;
 
+            });
+        }
+
+        public Operation<GroupModel[]> GetUserGroup(int userId)
+        {
+            return Operation.Create(() =>
+            {
+                var groupIds = _repo.Query<UserGroup>().Where(ug => ug.UserId == userId).ToList().Select(ug => ug.GroupId);
+                var groups = _repo.Query<Group>().Where(g => groupIds.Contains(g.GroupId)).ToList();
+                var groupmodel = groups.Select(g => new GroupModel(g)).ToArray();
+                return groupmodel;
             });
         }
 

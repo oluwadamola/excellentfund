@@ -22,6 +22,11 @@ namespace Contribution.Core.Business
         public MonthModel Month { get; set; }
         public GroupModel Group { get; set; }
         public YearModel Year { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string MonthName { get; set; }
+        public string YearName { get; set; }
 
 
         public ContributeModel()

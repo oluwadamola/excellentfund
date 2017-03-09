@@ -116,10 +116,21 @@ namespace Contribution.Core.Manager
     {
         return Operation.Create(() =>
         {
-            var contributions = _repo.Query<Contribute>().Where(c => c.GroupId == groupId).ToList();
+            var contributions = _repo.Query<Contribute>(c => c.User, c => c.Month, c => c.Year).Where(c => c.GroupId == groupId).ToList();
             if (contributions == null) throw new Exception("No Contributions in this group yet");
 
-                var model = contributions.Select(c => new ContributeModel(c)).ToArray();
+                var model = contributions.Select(c => new ContributeModel(c) {
+                    GroupId = c.GroupId,
+                    UserId = c.UserId,
+                    FirstName = c.User.Profile.FirstName,
+                    LastName = c.User.Profile.LastName,
+                    YearId = c.YearId,
+                    MonthId = c.MonthId,
+                    YearName = c.Year.YearName,
+                    MonthName = c.Month.MonthName,
+                    Email = c.User.Email
+
+                }).ToArray();
 
                 return model;
         });

@@ -5,10 +5,8 @@ namespace Contribution.Core.Interface.Data
 {
     public interface IContributionManager
     {
-        //Operation<long> CreateContributor(ContributeModel model);
         Operation<long> AddUserContributionToGroup(ContributeModel model);
         Operation<ContributeModel[]> GetContributors();
-        //Operation<ContributeModel> GetContributor(int userId);
         Operation<ContributeModel> UpdateContributor(int userId);
         Operation<long> CreateCollector(CollectorModel model);
         Operation<CollectorModel> GetCollectors();

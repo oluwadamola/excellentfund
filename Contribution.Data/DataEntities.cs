@@ -25,7 +25,9 @@ namespace Contribution.Data
         {
             //base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasRequired(u => u.Profile).WithRequiredPrincipal(p => p.User);
+            modelBuilder.Entity<User>() // one to one entity
+                .HasRequired(u => u.Profile)
+                .WithRequiredPrincipal(p => p.User); 
         }
     }
 

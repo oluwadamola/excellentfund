@@ -72,5 +72,13 @@ namespace Contribution.Web.Api
             return this.OperationResult(op);
         }
 
+        [Authorize]
+        [HttpGet, Route("users/{userId:int}")]
+        public IHttpActionResult GetUserGroup(int userId)
+        {
+            var op = _groupManager.GetUserGroup(userId);
+            return this.OperationResult(op);
+        }
+
     }
 }

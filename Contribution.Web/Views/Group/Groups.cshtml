@@ -12,7 +12,7 @@
     </ul>
     <ul class="page-breadcrumb pull-right">
         <li>
-            System Administrator
+            @*System Administrator*@
         </li>
     </ul>
 </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-xs-6">
         <div class="page-actions">
-            <button ng-click="model.add()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>New Group</button>
+            <button ng-click="model.add()" ng-show="model.showCreate()" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>New Group</button>
         </div>
     </div>
 </div>

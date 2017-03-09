@@ -35,43 +35,25 @@ var Stev;
                     this.storage = _storage;
                 }
                 SignInCtrl.prototype.SignIn = function () {
-                    var _this = this;
                     //Validate User
-                    debugger;
-                    var user = this.storage.User; //Get Role from Storage
+                    var _this = this;
                     var signIn = this.user
                         .signIn(this.User.Email, this.User.Password)
                         .then(function (u) {
                         _this.user.getRoles(u.UserId).then(function (r) {
                             _this.Redirect(r),
-                                //Initialize User
-                                /*this.Userstrg =
-                                {
-                                    UserId: this.storage.User.UserId,
-                                    Email: this.storage.User.Email,
-                                    Title: this.storage.User.Title,
-                                    Roles: r,
-                                    FirstName: this.storage.User.FirstName,
-                                    LastName: this.storage.User.LastName,
-                                    ImageUrl: this.storage.User.ImageUrl,
-                                    FullName: this.storage.User.FullName
-                                }*/
-                                //this.User.Roles = r;
-                                //Add User Role
-                                user.Roles = r;
-                            _this.storage.User = user; //Save Role to Storage
+                                u.Roles = r;
+                            _this.storage.User = u; //Save Role to Storage
                         }),
                             _this.UserId = u.UserId;
                     })
                         .catch(function (err) { return _this.notify.error(err); });
                 };
                 SignInCtrl.prototype.Redirect = function (roles) {
-                    debugger;
                     if (!roles.length) {
                         this.notify.error("No Role found, Please Contact your Administrator");
                     }
                     else if (roles.length == 1) {
-                        debugger;
                         //Redirect to Challenge Area
                         var role = this.user.getRole(roles[0].RoleName);
                         document.location.href = role.Url;
@@ -237,3 +219,4 @@ var Stev;
         })(Controllers = Account.Controllers || (Account.Controllers = {}));
     })(Account = Stev.Account || (Stev.Account = {}));
 })(Stev || (Stev = {}));
+//# sourceMappingURL=controllers.js.map

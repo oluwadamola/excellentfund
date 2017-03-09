@@ -1,6 +1,5 @@
 ﻿using Contribution.Core.Business;
 using Contribution.Core.Interface.Data;
-using Contribution.Core.Interface.Manager;
 using Contribution.Web.Api.UserManagerModels;
 using Contribution.Web.Infastructure.Utils;
 using System;
@@ -28,8 +27,8 @@ namespace Contribution.Web.Api
         public IHttpActionResult CreateUser([FromBody]UserModel model)
         {
             var op = _userManager.CreateUser(model);
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         [Authorize]
@@ -37,8 +36,8 @@ namespace Contribution.Web.Api
         public IHttpActionResult AddUser([FromBody]UserModel model)
         {
             var op = _userManager.AddUser(model);
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
 
@@ -47,8 +46,8 @@ namespace Contribution.Web.Api
         public IHttpActionResult FindUserById(long userId)
         {
             var op = _userManager.FindUserById(userId);
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         //[NoCache]
@@ -56,8 +55,8 @@ namespace Contribution.Web.Api
         public IHttpActionResult GetRoles(int userId)
         {
             var op = _userManager.GetRoles(userId);
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         [Authorize]
@@ -82,8 +81,8 @@ namespace Contribution.Web.Api
         public IHttpActionResult FindUsers()
         {
             var op = _userManager.GetUsers();
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         [Authorize]
@@ -91,16 +90,16 @@ namespace Contribution.Web.Api
         public IHttpActionResult UpdateUser([FromBody]UserModel model)
         {
             var op = _userManager.UpdateUser(model);
-            // return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         [HttpPost, Route("validate")]
         public IHttpActionResult ValidateUser([FromBody]ValidateUserArgs args)
         {
             var op = _userManager.ValidateUser(args?.Email, args?.Password);
-            //return this.OperationResult(op);
-            return Ok(op);
+            return this.OperationResult(op);
+            //return Ok(op);
         }
 
         [Authorize]

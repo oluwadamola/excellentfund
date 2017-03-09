@@ -12,5 +12,6 @@ namespace Contribution.Core.Interface.Manager
         Operation<UserModel[]> GetUsersInGroup(int groupId);
         Operation<UserModel> GetUserInGroup(int groupId, int userId);
         Operation<UserModel[]> AddUserToGroup(int groupId, int userId);
+        Operation<GroupModel[]> GetUserGroup(int userId);
     }
 }

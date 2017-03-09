@@ -5,14 +5,34 @@ var Stev;
         var Controllers;
         (function (Controllers) {
             var GroupsCtrl = (function () {
-                function GroupsCtrl($uibModal, _group) {
+                function GroupsCtrl($uibModal, _group, _storage, $stateParams) {
                     this.modal = $uibModal;
                     this.group = _group;
+                    this.storage = _storage;
                     this.GetGroups();
                 }
                 GroupsCtrl.prototype.GetGroups = function () {
                     var _this = this;
-                    this.group.GetGroups().then(function (g) { return _this.Groups = g; });
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        this.group.GetGroups().then(function (g) { return _this.Groups = g; });
+                    }
+                    else {
+                        this.group.GetUserGroup(this.storage.User.UserId).then(function (ug) { return _this.Groups = ug; });
+                    }
+                };
+                GroupsCtrl.prototype.showCreate = function () {
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 };
                 GroupsCtrl.prototype.add = function () {
                     var _this = this;
@@ -304,7 +324,6 @@ var Stev;
                 }
                 CollectorCtrl.prototype.Ok = function (form, collector) {
                     var _this = this;
-                    debugger;
                     if (form.$valid) {
                         collector.UserId = collector.User.UserId;
                         collector.GroupId = this.Group.GroupId;

@@ -3,21 +3,43 @@
     class GroupsCtrl {
 
         Groups: GroupModel[];
+        Group: GroupModel;
 
         modal: angular.ui.bootstrap.IModalService;
         group: Services.Domain.Group;
+        storage: Services.StorageService;
 
-        constructor($uibModal, _group) {
+        constructor($uibModal, _group, _storage, $stateParams) {
             this.modal = $uibModal;
             this.group = _group;
+            this.storage = _storage;
             this.GetGroups();
         }
 
         GetGroups() {
+            var role = Constants.Roles.SystemAdministrator
 
-            this.group.GetGroups().then(g => this.Groups = g);
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                this.group.GetGroups().then(g => this.Groups = g);
+            }
+            else {
+                this.group.GetUserGroup(this.storage.User.UserId).then(ug => this.Groups = ug);
+            }
         }
+        showCreate() {
+            var role = Constants.Roles.SystemAdministrator
 
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
         add() {
 
@@ -426,7 +448,6 @@ module Stev.Group.Controllers {
 
         }
         Ok(form: angular.IFormController, collector: CollectorModel) {
-            debugger;
             if (form.$valid) {
                 collector.UserId = collector.User.UserId;
                 collector.GroupId = this.Group.GroupId;

@@ -128,6 +128,9 @@ var Stev;
                 Group.prototype.GetGroup = function (groupId) {
                     return this.http.get("/api/groups/" + groupId);
                 };
+                Group.prototype.GetUserGroup = function (userId) {
+                    return this.http.get("/api/groups/users/" + userId);
+                };
                 return Group;
             }());
             Domain.Group = Group;

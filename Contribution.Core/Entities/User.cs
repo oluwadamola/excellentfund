@@ -20,7 +20,6 @@ namespace Contribution.Core.Entities
         {
           Contributes = new HashSet<Contribute>();
           UserRoles = new HashSet<UserRole>();
-          //Groups = new HashSet<Group>();
           UserGroups = new HashSet<UserGroup>();
         }
 

@@ -28,5 +28,4 @@ module Stev.Constants {
         December: "December"
     }
 
-
 }

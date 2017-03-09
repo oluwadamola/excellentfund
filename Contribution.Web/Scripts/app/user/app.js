@@ -59,7 +59,7 @@ var Stev;
         /// Configure Authentication
         User.module.run(function ($rootScope, _storage) {
             $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
-                var role = Stev.Constants.Roles.SystemAdministrator;
+                var role = Stev.Constants.Roles.User;
                 //Check to see if user has this role for current organisation
                 var hasRole = _storage.User
                     .Roles

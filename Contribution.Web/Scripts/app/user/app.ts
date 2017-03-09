@@ -69,7 +69,7 @@
         $rootScope.$on('$stateChangeStart',
             function (event, toState, toStateParams) {
 
-                var role = Constants.Roles.SystemAdministrator;
+                var role = Constants.Roles.User;
 
                 //Check to see if user has this role for current organisation
                 var hasRole = _storage.User

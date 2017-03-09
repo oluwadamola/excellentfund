@@ -164,6 +164,10 @@
             return this.http.get<GroupModel>(`/api/groups/${groupId}`);
         }
 
+        GetUserGroup(userId: number) {
+            return this.http.get<GroupModel[]>(`/api/groups/users/${userId}`);
+        }
+
     }
 
     export class Contribution {
