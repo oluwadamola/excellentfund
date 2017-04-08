@@ -1,8 +1,10 @@
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Core.dll
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Core.pdb
-C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Infrastructure.dll
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Operation.dll
-C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Infrastructure.pdb
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\obj\Debug\Contribution.Core.csprojResolveAssemblyReference.cache
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\obj\Debug\Contribution.Core.dll
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\obj\Debug\Contribution.Core.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Data.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\EntityFramework.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\Contribution.Data.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Core\bin\Debug\EntityFramework.xml

@@ -885,6 +885,8 @@
     <Content Include="Views\Contribution\Collector.cshtml" />
     <Content Include="Views\Contribution\Collectors.cshtml" />
     <Content Include="Views\Group\collectors.cshtml" />
+    <Content Include="Views\Shared\_Directives.cshtml" />
+    <Content Include="Content\Excel\User.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -951,6 +953,7 @@
     <TypeScriptCompile Include="Scripts\app\infrastructure\Utils\Interceptors.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\app\infrastructure\paging.ts" />
     <TypeScriptCompile Include="Scripts\app\models.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

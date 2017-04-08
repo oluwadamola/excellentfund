@@ -136,13 +136,7 @@
         }
 
         GetRoles(userId: number) {
-            //this.Roles = this.user.getAllRoles();
-            this.user.getRoles(userId).then(r => this.Roles = r);
-            /*this.user.getUser(userId).then(u => {
-                this.User = u;
-                console.log(this.User);
-                this.Roles = u.Roles.map(ur => this.user.getRole(ur.RoleName))
-            });*/
+            this.user.getUserRoles(userId).then(r => this.Roles = r.map(ur => this.user.getRole(ur.RoleName)));
         }
 
         AddRole() {

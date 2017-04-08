@@ -42,7 +42,7 @@ module Stev.Account.Controllers {
             var signIn = this.user
                 .signIn(this.User.Email, this.User.Password)
                 .then(u => {
-                    this.user.getRoles(u.UserId).then(r => {
+                    this.user.getUserRoles(u.UserId).then(r => {
                         this.Redirect(r),
                             u.Roles = r;
                         this.storage.User = u;       //Save Role to Storage
@@ -123,7 +123,7 @@ module Stev.Account.Controllers {
             signIn.then(id => {
                 this.notify.success("User was created Successfully");
             }).then(u => 
-                this.user.getRoles(this.User.UserId))
+                this.user.getUserRoles(this.User.UserId))
                 .then(r => {
 
                     this.Roles = r;
@@ -201,7 +201,7 @@ module Stev.Account.Controllers {
             this.storage = _storage;
 
             this.user
-                .getRoles($stateParams["id"])
+                .getUserRoles($stateParams["id"])
                 .then(r => this.SetRoles(r));
         }
 

@@ -1,8 +1,8 @@
-﻿using Contribution.Core.Entities;
+﻿using Contribution.Data.Entities;
 using System.Data.Entity;
 
 
-namespace Contribution.Data
+namespace Contribution.Core
 {
     public class DataEntities : DbContext
     {

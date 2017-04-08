@@ -59,9 +59,8 @@ div[data-loader] {
 .fa {
     margin-right: 7px;
 }
-
-.page-actions {
-    margin-top: 15px;
+.page-actions .btn{
+    margin:10px;   
 }
 
 #toast-container {
@@ -72,6 +71,7 @@ div[data-loader] {
 /* Extra Small */
 @media (max-width: 767px) {
     .page-actions {
+
         margin-top: 20px;
     }
 

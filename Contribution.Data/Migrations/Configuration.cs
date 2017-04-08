@@ -1,8 +1,8 @@
-namespace Contribution.Data.Migrations
+namespace Contribution.Core.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Contribution.Data.DataEntities>
+    public sealed class Configuration : DbMigrationsConfiguration<Contribution.Core.DataEntities>
     {
         public Configuration()
         {
@@ -10,7 +10,7 @@ namespace Contribution.Data.Migrations
             ContextKey = "Contribution.Data.DataEntities";
         }
 
-        protected override void Seed(Contribution.Data.DataEntities context)
+        protected override void Seed(Contribution.Core.DataEntities context)
         {
             //  This method will be called after migrating to the latest version.
 

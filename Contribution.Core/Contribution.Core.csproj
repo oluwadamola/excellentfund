@@ -59,22 +59,11 @@
     <Compile Include="Business\RoleModel.cs" />
     <Compile Include="Business\UserModel.cs" />
     <Compile Include="Business\YearModel.cs" />
-    <Compile Include="Entities\Collector.cs" />
-    <Compile Include="Entities\Contribute.cs" />
-    <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\UserGroup.cs" />
-    <Compile Include="Entities\Month.cs" />
-    <Compile Include="Entities\Profile.cs" />
-    <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserRole.cs" />
-    <Compile Include="Entities\Year.cs" />
-    <Compile Include="Interface\Data\ICollectorManager.cs" />
-    <Compile Include="Interface\Data\IContributionManager.cs" />
-    <Compile Include="Interface\Data\IDataRepository.cs" />
-    <Compile Include="Interface\Data\IEntityRepository.cs" />
-    <Compile Include="Interface\Data\IGroupManager.cs" />
-    <Compile Include="Interface\Data\IUserManager.cs" />
+    <Compile Include="Interface\ICollectorManager.cs" />
+    <Compile Include="Interface\IContributionManager.cs" />
+    <Compile Include="Interface\Utils\IExcelProcessor.cs" />
+    <Compile Include="Interface\IGroupManager.cs" />
+    <Compile Include="Interface\IUserManager.cs" />
     <Compile Include="Manager\CollectorManager.cs" />
     <Compile Include="Manager\ContributionManager.cs" />
     <Compile Include="Manager\GroupManager.cs" />
@@ -85,9 +74,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Contribution.Infrastructure\Contribution.Infrastructure.csproj">
-      <Project>{66014ef5-4a4a-4ced-af5a-9d8a8e681680}</Project>
-      <Name>Contribution.Infrastructure</Name>
+    <ProjectReference Include="..\Contribution.Data\Contribution.Data.csproj">
+      <Project>{b9e7f307-fd4b-4ff9-8eec-dbd85bd8bf5a}</Project>
+      <Name>Contribution.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,4 @@
-﻿using Contribution.Core.Interface.Data;
+﻿using Contribution.Data.Interface;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -6,7 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Contribution.Data
+namespace Contribution.Core
 {
     public class EntityRepository : IDataRepository
     {

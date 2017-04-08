@@ -1,6 +1,7 @@
 ﻿using Contribution.Core.Business;
-using Contribution.Core.Entities;
-using Contribution.Core.Interface.Data;
+using Contribution.Core.Interface;
+using Contribution.Data.Entities;
+using Contribution.Data.Interface;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
-using static Contribution.Core.Entities.Role;
+using static Contribution.Data.Entities.Role;
 
 namespace Contribution.Core.Manager
 {

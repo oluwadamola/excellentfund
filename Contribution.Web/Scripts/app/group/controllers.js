@@ -125,22 +125,31 @@ var Stev;
         var Controllers;
         (function (Controllers) {
             var UsersGrpCtrl = (function () {
-                function UsersGrpCtrl(_user, $stateParams, _notify, _group, $uibModal) {
+                function UsersGrpCtrl(_user, $stateParams, _notify, _group, $uibModal, _storage) {
                     var _this = this;
                     this.user = _user;
                     this.modal = $uibModal;
                     this.notify = _notify;
                     this.group = _group;
-                    this.user.getUsersInGroup($stateParams["gid"]).then(function (u) {
-                        _this.Users = u;
-                    }).catch(function (m) { return _this.notify.warning(m); });
+                    this.storage = _storage;
                     this.group.GetGroup($stateParams["gid"]).then(function (g) { return _this.Group = g; });
-                    //this.getUsers();
                     this.fetchUsers($stateParams["gid"]);
                 }
                 UsersGrpCtrl.prototype.fetchUsers = function (groupId) {
-                    var _this = this;
-                    this.user.getUsersInGroup(groupId).then(function (g) { return _this.Users = g; });
+                    //this.user.getUsersInGroup(groupId).then(g => this.Users = g);
+                    this.Users = new PagedList(this.user.getUsersInGroup1(groupId), 10);
+                    console.log(this.Users);
+                };
+                UsersGrpCtrl.prototype.showCreate = function () {
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 };
                 UsersGrpCtrl.prototype.addUserGroup = function () {
                     var _this = this;
@@ -150,7 +159,36 @@ var Stev;
                     });
                     instance.result.then(function () { return _this.fetchUsers(_this.Group.GroupId); });
                 };
+                UsersGrpCtrl.prototype.upload = function () {
+                    var _this = this;
+                    var instance = this.modal.open({
+                        templateUrl: "uploadUser.html",
+                        controller: "UploadUserCtrl as model",
+                        resolve: {
+                            group: function () { return _this.Group; }
+                        }
+                    });
+                    instance.result.then(function () { return _this.fetchUsers(_this.Group.GroupId); });
+                };
                 return UsersGrpCtrl;
+            }());
+            var UploadUserCtrl = (function () {
+                function UploadUserCtrl(group, _user, $uibModalInstance, _notify) {
+                    var _this = this;
+                    this.Group = group;
+                    this.user = _user;
+                    this.notify = _notify;
+                    this.instance = $uibModalInstance;
+                    this.user.getUsers().then(function (u) { return _this.Users = u; });
+                }
+                UploadUserCtrl.prototype.Ok = function () {
+                    var _this = this;
+                    this.user.uploadUsers(this.Group.GroupId, this.UserFile).then(function (u) { return _this.instance.close(u); });
+                };
+                UploadUserCtrl.prototype.Cancel = function () {
+                    this.instance.dismiss(this.notify.info("User closed dialog"));
+                };
+                return UploadUserCtrl;
             }());
             var UserGrpCtrl = (function () {
                 function UserGrpCtrl(_user, _notify, _group, $stateParams) {
@@ -197,6 +235,7 @@ var Stev;
             Group.module.controller("UsersGrpCtrl", UsersGrpCtrl);
             Group.module.controller("UserGrpCtrl", UserGrpCtrl);
             Group.module.controller("AddUserGroupCtrl", AddUserGroupCtrl);
+            Group.module.controller("UploadUserCtrl", UploadUserCtrl);
         })(Controllers = Group.Controllers || (Group.Controllers = {}));
     })(Group = Stev.Group || (Stev.Group = {}));
 })(Stev || (Stev = {}));
@@ -207,21 +246,31 @@ var Stev;
         var Controllers;
         (function (Controllers) {
             var ContributorsCtrl = (function () {
-                function ContributorsCtrl(_user, _notify, _contribution, $stateParams, _group, $uibModal) {
+                function ContributorsCtrl(_user, _notify, _contribution, $stateParams, _group, $uibModal, _storage) {
                     var _this = this;
                     this.user = _user;
                     this.notify = _notify;
                     this.contribution = _contribution;
                     this.group = _group;
                     this.modal = $uibModal;
-                    //this.contribution.getContributors().then(c => this.Contribution = c);
-                    //this.contribution.getContributorsInGroup($stateParams["gid"]).then(c => this.Contributions = c);
+                    this.storage = _storage;
                     this.fetchContributors($stateParams["gid"]);
                     this.group.GetGroup($stateParams["gid"]).then(function (g) { return _this.Group = g; });
                 }
                 ContributorsCtrl.prototype.fetchContributors = function (groupId) {
                     var _this = this;
                     this.contribution.getContributorsInGroup(groupId).then(function (c) { return _this.Contributions = c; });
+                };
+                ContributorsCtrl.prototype.showCreate = function () {
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 };
                 ContributorsCtrl.prototype.addContributionsGroup = function () {
                     var _this = this;
@@ -239,7 +288,6 @@ var Stev;
             var AddUserContributionGroupCtrl = (function () {
                 function AddUserContributionGroupCtrl(_user, _contribution, _notify, $uibModalInstance, group) {
                     var _this = this;
-                    debugger;
                     this.user = _user;
                     this.contribution = _contribution;
                     this.notify = _notify;
@@ -281,13 +329,14 @@ var Stev;
         var Controllers;
         (function (Controllers) {
             var CollectorsCtrl = (function () {
-                function CollectorsCtrl(_user, _group, _notify, $uibModal, $stateParams, _collector) {
+                function CollectorsCtrl(_user, _group, _notify, $uibModal, $stateParams, _collector, _storage) {
                     var _this = this;
                     this.user = _user;
                     this.collector = _collector;
                     this.group = _group;
                     this.notify = _notify;
                     this.modal = $uibModal;
+                    this.storage = _storage;
                     this.user.getUsersInGroup($stateParams["gid"]).then(function (u) { return _this.Users = u; });
                     this.group.GetGroup($stateParams["gid"]).then(function (g) { return _this.Group = g; });
                     this.fetchCollectors($stateParams["gid"]);
@@ -295,6 +344,17 @@ var Stev;
                 CollectorsCtrl.prototype.fetchCollectors = function (groupId) {
                     var _this = this;
                     this.collector.getCollectorsInGroup(groupId).then(function (c) { return _this.Collectors = c; });
+                };
+                CollectorsCtrl.prototype.showCreate = function () {
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 };
                 CollectorsCtrl.prototype.addCollector = function () {
                     var _this = this;

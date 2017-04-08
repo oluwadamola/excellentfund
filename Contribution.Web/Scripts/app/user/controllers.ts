@@ -13,12 +13,14 @@
         notify: Services.NotifyService;
         modal: angular.ui.bootstrap.IModalService;
         state: angular.ui.IStateService;
+        storage: Services.StorageService;
 
-        constructor(_user, _notify, $uibModal, $state, $stateParams) {
+        constructor(_user, _notify, $uibModal, $state, $stateParams, _storage) {
             this.user = _user;
             this.notify = _notify;
             this.modal = $uibModal;
             this.state = $state;
+            this.storage = _storage;
 
             var GetUsers = this.user.getUsers().then(u => this.Users = u);
             
@@ -35,6 +37,18 @@
           // instance.result.then(() => this.Users = GetUsers());
         }
 
+        showCreate() {
+            var role = Constants.Roles.SystemAdministrator
+
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
         Select(user: UserModel) {
             this.state.go("users.profile",
@@ -102,7 +116,7 @@
                 //this.Roles = u.Roles.map(r => this.user.getRole(r.RoleName))
             });*/
 
-            this.user.getRoles(userId).then(r => this.Roles = r);
+            this.user.getUserRoles(userId).then(r => this.Roles = r);
         }
 
         AddRole() {

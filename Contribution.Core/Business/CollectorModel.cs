@@ -1,4 +1,4 @@
-﻿using Contribution.Core.Entities;
+﻿using Contribution.Data.Entities;
 
 namespace Contribution.Core.Business
 {

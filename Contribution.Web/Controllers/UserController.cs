@@ -1,4 +1,5 @@
-﻿using Contribution.Core.Interface.Data;
+﻿using Contribution.Core.Interface;
+using Contribution.Core.Interface.Data;
 using System;
 using System.Web.Mvc;
 

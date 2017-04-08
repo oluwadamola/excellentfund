@@ -44,7 +44,7 @@
         add() {
 
            var instance = this.modal.open({
-                templateUrl: "group.html",
+            templateUrl: "group.html",
                 controller: "AddGroupCtrl as model",
             });
             instance.result.then(g =>  this.GetGroups());
@@ -152,34 +152,49 @@
 
 module Stev.Group.Controllers {
 
-    class UsersGrpCtrl {
 
-        Users: UserModel[];
+    class UsersGrpCtrl {
+        
+
+        //Users: UserModel[];
+        Users: PagedList<UserModel>;
         Group: GroupModel;
 
         user: Services.Domain.User;
         group: Services.Domain.Group;
         notify: Services.NotifyService;
         modal: angular.ui.bootstrap.IModalService;
+        storage: Services.StorageService;
 
-        constructor(_user, $stateParams, _notify, _group, $uibModal) {
+
+        constructor(_user, $stateParams, _notify, _group, $uibModal, _storage) {
             this.user = _user;
             this.modal = $uibModal;
             this.notify = _notify;
             this.group = _group;
-
-            this.user.getUsersInGroup($stateParams["gid"]).then(u => {
-                this.Users = u;
-            }).catch(m => this.notify.warning(m));
+            this.storage = _storage;
 
             this.group.GetGroup($stateParams["gid"]).then(g => this.Group = g);
-            //this.getUsers();
 
             this.fetchUsers($stateParams["gid"])
         }
 
         fetchUsers(groupId: number) {
-            this.user.getUsersInGroup(groupId).then(g => this.Users = g);
+            //this.user.getUsersInGroup(groupId).then(g => this.Users = g);
+            this.Users = new PagedList(this.user.getUsersInGroup1(groupId), 10);
+            console.log(this.Users)
+        }
+
+        showCreate() {
+            var role = Constants.Roles.SystemAdministrator
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         addUserGroup() {
@@ -189,6 +204,47 @@ module Stev.Group.Controllers {
             });
 
            instance.result.then(() => this.fetchUsers(this.Group.GroupId));
+        }
+
+        upload() {
+            var instance = this.modal.open({
+                templateUrl: "uploadUser.html",
+                controller: "UploadUserCtrl as model",
+                resolve: {
+                    group: () => this.Group
+                }
+            });
+
+            instance.result.then(() => this.fetchUsers(this.Group.GroupId));
+        }
+    }
+
+    class UploadUserCtrl {
+
+        Group: GroupModel;
+        Users: UserModel[];
+
+        user: Services.Domain.User;
+        notify: Services.NotifyService;
+        instance: angular.ui.bootstrap.IModalServiceInstance;
+        UserFile: File;
+
+
+        constructor(group, _user, $uibModalInstance, _notify) {
+            this.Group = group;
+            this.user = _user;
+            this.notify = _notify;
+            this.instance = $uibModalInstance;
+
+            this.user.getUsers().then(u => this.Users = u);
+        }
+
+        Ok() {
+            this.user.uploadUsers(this.Group.GroupId, this.UserFile).then(u => this.instance.close(u))
+        }
+
+        Cancel() {
+            this.instance.dismiss(this.notify.info("User closed dialog"));
         }
     }
 
@@ -267,6 +323,7 @@ module Stev.Group.Controllers {
     module.controller("UsersGrpCtrl", UsersGrpCtrl);
     module.controller("UserGrpCtrl", UserGrpCtrl);
     module.controller("AddUserGroupCtrl", AddUserGroupCtrl);
+    module.controller("UploadUserCtrl", UploadUserCtrl);
 }
 
 
@@ -284,16 +341,15 @@ module Stev.Group.Controllers {
         user: Services.Domain.User;
         contribution: Services.Domain.Contribution;
         notify: Services.NotifyService;
+        storage: Services.StorageService;
 
-        constructor(_user, _notify, _contribution, $stateParams, _group, $uibModal) {
+        constructor(_user, _notify, _contribution, $stateParams, _group, $uibModal, _storage) {
             this.user = _user;
             this.notify = _notify;
             this.contribution = _contribution;
             this.group = _group;
             this.modal = $uibModal;
-            //this.contribution.getContributors().then(c => this.Contribution = c);
-
-            //this.contribution.getContributorsInGroup($stateParams["gid"]).then(c => this.Contributions = c);
+            this.storage = _storage;
             this.fetchContributors($stateParams["gid"])
             this.group.GetGroup($stateParams["gid"]).then(g => this.Group = g);
 
@@ -301,6 +357,19 @@ module Stev.Group.Controllers {
 
         fetchContributors(groupId: number) {
             this.contribution.getContributorsInGroup(groupId).then(c => this.Contributions = c);
+        }
+
+        showCreate() {
+            var role = Constants.Roles.SystemAdministrator
+
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         addContributionsGroup() {
@@ -333,7 +402,6 @@ module Stev.Group.Controllers {
         instance: angular.ui.bootstrap.IModalServiceInstance;
 
         constructor(_user, _contribution, _notify, $uibModalInstance, group) {
-            debugger;
             this.user = _user;
             this.contribution = _contribution;
             this.notify = _notify;
@@ -383,24 +451,37 @@ module Stev.Group.Controllers {
         collector: Services.Domain.Collector;
         notify: Services.NotifyService;
         modal: angular.ui.bootstrap.IModalService;
- 
+        storage: Services.StorageService;
     
          
-        constructor(_user, _group, _notify, $uibModal, $stateParams, _collector) {
+        constructor(_user, _group, _notify, $uibModal, $stateParams, _collector, _storage) {
             this.user = _user;
             this.collector = _collector;
             this.group = _group;
             this.notify = _notify;
             this.modal = $uibModal;
-            
+            this.storage = _storage;
+
             this.user.getUsersInGroup($stateParams["gid"]).then(u => this.Users = u);
             this.group.GetGroup($stateParams["gid"]).then(g => this.Group = g);
             this.fetchCollectors($stateParams["gid"]);
-
+            
         }
 
         fetchCollectors(groupId: number) {
             this.collector.getCollectorsInGroup(groupId).then(c => this.Collectors = c);
+        }
+
+        showCreate(){
+            var role = Constants.Roles.SystemAdministrator
+            //Check to see if user has admin role
+            var hasRole = this.storage.User.Roles.filter(r => r.RoleName == role).length;
+            if (hasRole) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         addCollector() {

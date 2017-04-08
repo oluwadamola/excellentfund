@@ -1,4 +1,4 @@
-﻿using Contribution.Core.Entities;
+﻿using Contribution.Data.Entities;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -24,9 +24,5 @@ namespace Contribution.Core.Business
         {
             this.Assign(month);
         }
-    }
-
-    public enum AppMonths{
-        January, February, March, April, May, June, July, August, September, October, November, December
     }
 }

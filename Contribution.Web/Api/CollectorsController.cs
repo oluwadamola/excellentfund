@@ -1,5 +1,5 @@
 ﻿using Contribution.Core.Business;
-using Contribution.Core.Interface.Data;
+using Contribution.Core.Interface;
 using Contribution.Web.Infastructure.Utils;
 using System.Web.Http;
 

@@ -18,7 +18,7 @@
     </ul>
 
     <ul class="page-breadcrumb pull-right">
-        <li>
+        <li ng-show="model.showCreate()">
             System Administrator
         </li>
     </ul>
@@ -33,7 +33,7 @@
     <div class="col-xs-6">
         <div class="page-actions">
             <button class="btn purple pull-right"
-                    ng-click="model.addCollector()">
+                   ng-show="model.showCreate()" ng-click="model.addCollector()">
                 <i class="fa fa-plus"></i> Add Collector To Group
             </button>
         </div>
@@ -49,8 +49,8 @@
                         <th>S/N</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                          <th>Month</th>
-                          <th>Email</th>
+                        <th>Month</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>

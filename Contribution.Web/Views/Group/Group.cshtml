@@ -14,14 +14,14 @@
     </ul>
 
     <ul class="page-breadcrumb pull-right">
-        <li>
+        <li ng-show="model.showCreate()">
             System Administrator
         </li>
     </ul>
 </div>
 
 <h1 class="page-title">
-    <i class="fa fa-certificate font-yellow-casablanca"></i> Group Details
+    <i class="fa fa-certificate font-yellow-casablanca" ng-show="model.showCreate()"></i> Group Details
     <small></small>
 </h1>
 

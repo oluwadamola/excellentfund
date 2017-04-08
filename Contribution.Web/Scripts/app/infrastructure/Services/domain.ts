@@ -58,6 +58,18 @@
             return this.http.get<UserModel[]>("/api/users/GetUsers");
         }
 
+        uploadUsers(groupId: number, userFile: File) {
+            var defer = this.Q.defer<UserModel[]>();
+            var uploadFile = this.file.post<Operation<UserModel[]>>(`/api/groups/${groupId}/users`, userFile)
+
+            uploadFile.then(r => defer.resolve(r.Result));
+            uploadFile.catch(r => {
+                defer.reject(r);
+            });
+
+            return defer.promise;
+        }
+
         addUser(user: UserModel) {
             return this.http.post<number>("/api/users/user", user);
         }
@@ -88,9 +100,9 @@
             });
         }
 
-        getRoles(userID: number) {
+       /* getRoles(userID: number) {
             return this.http.get<RoleModel[]>(`/api/users/${userID}/roles`);
-        }
+        }*/
 
         getUserRoles(userId: number) {
             return this.http.get<RoleModel[]>(`/api/users/${userId}/roles`);
@@ -125,6 +137,15 @@
 
         getUsersInGroup(groupId: number) {
             return this.http.get<UserModel[]>(`/api/groups/${groupId}/users`);
+        }
+
+        getUsersInGroup1(groupId: number) {
+            debugger;
+            var list: IList<UserModel> = {
+                Count: () => this.http.get<number>(`/api/groups/${groupId}/users/count`),
+                Slice: (offset, limit) => this.http.get<UserModel[]>(`/api/groups/${groupId}/users?offset=`+ offset+"&limit="+limit)
+            }
+            return list;
         }
 
         assignUserToGroup(groupId: number, User: UserModel) {

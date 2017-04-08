@@ -54,7 +54,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntities.cs" />
+    <Compile Include="Entities\Collector.cs" />
+    <Compile Include="Entities\Contribute.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Month.cs" />
+    <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserGroup.cs" />
+    <Compile Include="Entities\UserRole.cs" />
+    <Compile Include="Entities\Year.cs" />
     <Compile Include="EntityRepository.cs" />
+    <Compile Include="Interface\IDataRepository.cs" />
     <Compile Include="Migrations\201701250227122_InitialCreate.cs" />
     <Compile Include="Migrations\201701250227122_InitialCreate.Designer.cs">
       <DependentUpon>201701250227122_InitialCreate.cs</DependentUpon>
@@ -72,22 +83,12 @@
       <DependentUpon>201702262101244_changeInGroupAndContributeEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\SeedData.cs" />
+    <Compile Include="SeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Contribution.Core\Contribution.Core.csproj">
-      <Project>{5a41c839-4738-4ebb-ae17-8a3ac8b84c78}</Project>
-      <Name>Contribution.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Contribution.Infrastructure\Contribution.Infrastructure.csproj">
-      <Project>{66014ef5-4a4a-4ced-af5a-9d8a8e681680}</Project>
-      <Name>Contribution.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701250227122_InitialCreate.resx">

@@ -1,5 +1,5 @@
 ﻿module Stev.Group {
-    export const module = angular.module("Stev.Group", ["ui.router"]);
+    export const module = angular.module("Stev.Group", ["ui.router", "Stev.Infrastructure"]);
 
     module.config(function ($stateProvider: angular.ui.IStateProvider, $urlRouterProvider: angular.ui.IUrlRouterProvider) {
          

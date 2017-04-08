@@ -40,7 +40,7 @@ var Stev;
                     var signIn = this.user
                         .signIn(this.User.Email, this.User.Password)
                         .then(function (u) {
-                        _this.user.getRoles(u.UserId).then(function (r) {
+                        _this.user.getUserRoles(u.UserId).then(function (r) {
                             _this.Redirect(r),
                                 u.Roles = r;
                             _this.storage.User = u; //Save Role to Storage
@@ -106,7 +106,7 @@ var Stev;
                     signIn.then(function (id) {
                         _this.notify.success("User was created Successfully");
                     }).then(function (u) {
-                        return _this.user.getRoles(_this.User.UserId);
+                        return _this.user.getUserRoles(_this.User.UserId);
                     })
                         .then(function (r) {
                         _this.Roles = r;
@@ -181,7 +181,7 @@ var Stev;
                     this.notify = _notify;
                     this.storage = _storage;
                     this.user
-                        .getRoles($stateParams["id"])
+                        .getUserRoles($stateParams["id"])
                         .then(function (r) { return _this.SetRoles(r); });
                 }
                 ChallengeCtrl.prototype.SetRoles = function (roles) {

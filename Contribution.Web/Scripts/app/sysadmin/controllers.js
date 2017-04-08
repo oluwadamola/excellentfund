@@ -92,13 +92,7 @@ var Stev;
                 }
                 UserCtrl.prototype.GetRoles = function (userId) {
                     var _this = this;
-                    //this.Roles = this.user.getAllRoles();
-                    this.user.getRoles(userId).then(function (r) { return _this.Roles = r; });
-                    /*this.user.getUser(userId).then(u => {
-                        this.User = u;
-                        console.log(this.User);
-                        this.Roles = u.Roles.map(ur => this.user.getRole(ur.RoleName))
-                    });*/
+                    this.user.getUserRoles(userId).then(function (r) { return _this.Roles = r.map(function (ur) { return _this.user.getRole(ur.RoleName); }); });
                 };
                 UserCtrl.prototype.AddRole = function () {
                     var _this = this;

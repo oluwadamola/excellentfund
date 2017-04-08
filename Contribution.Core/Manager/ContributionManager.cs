@@ -1,6 +1,7 @@
 ﻿using Contribution.Core.Business;
-using Contribution.Core.Entities;
 using Contribution.Core.Interface.Data;
+using Contribution.Data.Entities;
+using Contribution.Data.Interface;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

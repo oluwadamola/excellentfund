@@ -10,12 +10,13 @@ var Stev;
                 return HomeCtrl;
             }());
             var UsersCtrl = (function () {
-                function UsersCtrl(_user, _notify, $uibModal, $state, $stateParams) {
+                function UsersCtrl(_user, _notify, $uibModal, $state, $stateParams, _storage) {
                     var _this = this;
                     this.user = _user;
                     this.notify = _notify;
                     this.modal = $uibModal;
                     this.state = $state;
+                    this.storage = _storage;
                     var GetUsers = this.user.getUsers().then(function (u) { return _this.Users = u; });
                 }
                 UsersCtrl.prototype.Add = function () {
@@ -24,6 +25,17 @@ var Stev;
                         controller: "AddUserCtrl as model",
                     });
                     // instance.result.then(() => this.Users = GetUsers());
+                };
+                UsersCtrl.prototype.showCreate = function () {
+                    var role = Stev.Constants.Roles.SystemAdministrator;
+                    //Check to see if user has admin role
+                    var hasRole = this.storage.User.Roles.filter(function (r) { return r.RoleName == role; }).length;
+                    if (hasRole) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 };
                 UsersCtrl.prototype.Select = function (user) {
                     this.state.go("users.profile", {
@@ -70,7 +82,7 @@ var Stev;
                         //this.Roles = u.Roles.map(r => this.user.getRole(r.RoleName))
                     });*/
                     var _this = this;
-                    this.user.getRoles(userId).then(function (r) { return _this.Roles = r; });
+                    this.user.getUserRoles(userId).then(function (r) { return _this.Roles = r; });
                 };
                 UserCtrl.prototype.AddRole = function () {
                     var _this = this;

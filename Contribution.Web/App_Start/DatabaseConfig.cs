@@ -10,7 +10,7 @@ namespace Contribution.Web.App_Start
     {
         public static void MigrateToLatest()
         {
-            var configuration = new Data.Migrations.Configuration()
+            var configuration = new Core.Migrations.Configuration()
             {
 
             };               

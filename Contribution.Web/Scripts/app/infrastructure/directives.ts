@@ -98,4 +98,92 @@
         }
     }
     module.directive('backgroundImage', backgroundImage);
+
+
+
+
+}
+
+
+module Stev.Infrastructure.Directive {
+    class PageCtrl {
+
+        page: PagedList<any>;
+
+        static $inject = ["$scope"];
+        constructor($scope) {
+            this.page = $scope.page;
+        }
+
+        next() {
+            this.page.NextPage();
+            console.log("Next Clicked: " + this.page.Items().length);
+        }
+
+        prev() {
+            this.page.previousPage();
+        }
+
+        goto(index: number) {
+            this.page.Goto(index + 1);
+        }
+
+        isCurrentPage(item) {
+            return this.page.CurrentPage() == item + 1;
+        }
+
+        links() {
+            var page = this.page;
+            var arr = [];
+            if (page && page.Pages() > 0) {
+
+                var curr = page.CurrentPage();
+                var count = page.Pages();
+
+                var k = 5;
+
+                //Get Index Bounds
+                var kl = curr - k;
+                var kr = curr + k;
+
+                //Handle Left Overflow
+                if (kl < 0) {
+                    kr = kr + (kl * -1)
+                    kl = 0;
+                }
+
+                //Handle Right Overflow
+                if (kr > count) {
+                    kl = kl - (kr - count);
+                    kr = count;
+                }
+
+                //Handle Recursive Left Overflow
+                if (kl < 0) {
+                    kl = 0
+                }
+
+                //Plot Range
+                for (var x = kl; x < kr; x++) {
+                    arr.push(x);
+                }
+            }
+
+            return arr;
+        }
+    }
+
+    var Directive = function (): ng.IDirective {
+        return {
+            restrict: "EA",
+            templateUrl: "template/paging/pager.html",
+            scope: {
+                page: "="
+            },
+            controller: PageCtrl,
+            controllerAs: "model"
+        };
+    };
+
+    module.directive("odPager", Directive);
 }

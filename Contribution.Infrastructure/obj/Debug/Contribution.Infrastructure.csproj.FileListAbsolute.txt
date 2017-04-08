@@ -4,3 +4,17 @@ C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.I
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.csprojResolveAssemblyReference.cache
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.dll
 C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\obj\Debug\Contribution.Infrastructure.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Core.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\EPPlus.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\NPOI.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\NPOI.OOXML.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Core.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\EPPlus.xml
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\NPOI.xml
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Data.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\Contribution.Data.pdb
+C:\Users\bekky\Documents\Visual Studio 2015\Projects\Contribution\Contribution.Infrastructure\bin\Debug\EntityFramework.xml

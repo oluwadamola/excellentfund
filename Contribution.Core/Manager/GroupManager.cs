@@ -1,7 +1,9 @@
 ﻿using Contribution.Core.Business;
-using Contribution.Core.Entities;
-using Contribution.Core.Interface.Data;
+using Contribution.Data.Entities;
+using Contribution.Data.Interface;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Contribution.Core.Interface.Manager
@@ -65,11 +67,53 @@ namespace Contribution.Core.Interface.Manager
             });
         }
 
-        public Operation<UserModel> GetUserInGroup(int groupId, int userId)
+        public Operation<UserModel[]> GetUsersInGroup(int groupId, int offset, int limit)
         {
             return Operation.Create(() =>
             {
-                var usergroup = _repo.Query<UserGroup>().Where(ug => ug.GroupId == groupId && ug.UserId == userId).FirstOrDefault();
+                var usergroup = _repo.Query<UserGroup>().Where(ug => ug.GroupId == groupId).ToList();
+                if (usergroup == null) throw new Exception("No User in this group yet");
+
+                var model = usergroup.Select(ug => new UserModel()
+                {
+                    UserId = ug.UserId,
+                    Email = ug.User.Email,
+                    FirstName = ug.User.Profile.FirstName,
+                    LastName = ug.User.Profile.LastName
+                }).Skip(offset).Take(limit)
+
+                .ToArray();
+
+                return model;
+            });
+        }
+
+        public Operation<long> GetUserInGroupCount(int groupId)
+        {
+            return Operation.Create(() =>
+            {
+                var usergroup = _repo.Query<UserGroup>().Where(ug => ug.GroupId == groupId).ToList();
+                if (usergroup == null) throw new Exception("No User in this group yet");
+
+                var model = usergroup.Select(ug => new UserModel()
+                {
+                    UserId = ug.UserId,
+                    Email = ug.User.Email,
+                    FirstName = ug.User.Profile.FirstName,
+                    LastName = ug.User.Profile.LastName
+                })
+
+                .ToArray().LongCount();
+
+                return model;
+            });
+        }
+
+        public Operation<UserModel> GetUserInGroup(int groupId)
+        {
+            return Operation.Create(() =>
+            {
+                var usergroup = _repo.Query<UserGroup>().Where(ug => ug.GroupId == groupId).FirstOrDefault();
                 if (usergroup == null) throw new Exception("This User is not in this group yet");
 
                 var entity = _repo.GetByID<User>(usergroup.UserId);
@@ -97,6 +141,19 @@ namespace Contribution.Core.Interface.Manager
               var model = groups.Select(g => new GroupModel(g)).ToArray();
 
                 return model;
+            });
+        }
+
+        public Operation UploadUsers(int groupId, Stream userStream)
+        {
+            return Operation.Create(() =>
+            {
+                // reset stream
+                userStream.Seek(0, SeekOrigin.Begin);
+
+                var users = new List<UserModel>();
+
+                return users;
             });
         }
 

@@ -2,7 +2,7 @@ var Stev;
 (function (Stev) {
     var Group;
     (function (Group) {
-        Group.module = angular.module("Stev.Group", ["ui.router"]);
+        Group.module = angular.module("Stev.Group", ["ui.router", "Stev.Infrastructure"]);
         Group.module.config(function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.when("/groups", "/groups/list");
             $stateProvider

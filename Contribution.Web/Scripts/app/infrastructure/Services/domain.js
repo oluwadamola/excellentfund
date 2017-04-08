@@ -46,6 +46,15 @@ var Stev;
                 User.prototype.getUsers = function () {
                     return this.http.get("/api/users/GetUsers");
                 };
+                User.prototype.uploadUsers = function (groupId, userFile) {
+                    var defer = this.Q.defer();
+                    var uploadFile = this.file.post("/api/groups/" + groupId + "/users", userFile);
+                    uploadFile.then(function (r) { return defer.resolve(r.Result); });
+                    uploadFile.catch(function (r) {
+                        defer.reject(r);
+                    });
+                    return defer.promise;
+                };
                 User.prototype.addUser = function (user) {
                     return this.http.post("/api/users/user", user);
                 };
@@ -71,9 +80,9 @@ var Stev;
                         NewPassword: newPassword
                     });
                 };
-                User.prototype.getRoles = function (userID) {
-                    return this.http.get("/api/users/" + userID + "/roles");
-                };
+                /* getRoles(userID: number) {
+                     return this.http.get<RoleModel[]>(`/api/users/${userID}/roles`);
+                 }*/
                 User.prototype.getUserRoles = function (userId) {
                     return this.http.get("/api/users/" + userId + "/roles");
                 };
@@ -99,6 +108,15 @@ var Stev;
                 };
                 User.prototype.getUsersInGroup = function (groupId) {
                     return this.http.get("/api/groups/" + groupId + "/users");
+                };
+                User.prototype.getUsersInGroup1 = function (groupId) {
+                    var _this = this;
+                    debugger;
+                    var list = {
+                        Count: function () { return _this.http.get("/api/groups/" + groupId + "/users/count"); },
+                        Slice: function (offset, limit) { return _this.http.get(("/api/groups/" + groupId + "/users?offset=") + offset + "&limit=" + limit); }
+                    };
+                    return list;
                 };
                 User.prototype.assignUserToGroup = function (groupId, User) {
                     return this.http.post("/api/groups/" + groupId + "/users/" + User.UserId);

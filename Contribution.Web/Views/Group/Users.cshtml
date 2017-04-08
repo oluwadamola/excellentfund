@@ -18,35 +18,41 @@
     </ul>
 
     <ul class="page-breadcrumb pull-right">
-        <li>
+        <li ng-show="model.showCreate()">
             System Administrator
         </li>
     </ul>
 </div>
 
-<div>
-    <div class="col-xs-6">
-        <h1 class="page-title">
-            <i class="fa fa-pencil font-purple-studio"></i> Users
-        </h1>
-    </div>
-    <div class="col-xs-6">
-        <div class="page-actions">
-            <button class="btn purple pull-right"
-                ng-click="model.addUserGroup()">
-                <i class="fa fa-plus"></i> Add User To Group
-            </button>
-        </div>
-    </div>
+
+<div class="col-xs-12">
+    <h1 class="page-title">
+        <i class="fa fa-pencil font-purple-studio"></i> Users
+    </h1>
 </div>
 
+<div class="page-actions  col-xs-12">
+    <div class="pull-left" od-pager page="model.Users"></div>
+    <button class="btn purple pull-right"
+            ng-show="model.showCreate()" ng-click="model.addUserGroup()">
+        <i class="fa fa-plus"></i> Add User To Group
+    </button>
+
+    <button ng-click="model.upload()" class="btn btn-default pull-right">
+        <i class="fa fa-cloud-upload"></i> Upload
+    </button>
+</div>
+
+
+
 <div class="row">
+
     <div class="col-md-12">
         <div class="portlet light bordered">
-            <table class="table" ng-show="model.Users.length">
+            <table class="table" ng-show="model.Users.items.length">
                 <thead>
                     <tr>
-                        <th>UserId</th>
+                        <th>S/N</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -54,8 +60,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="overflow" ng-repeat="user in model.Users">
-                        <td>{{user.UserId}}</td>
+                    <tr class="overflow" ng-repeat="user in model.Users.items">
+                        <td>{{$index + 1 }}</td>
                         <td>{{user.FirstName || "N/A"}}</td>
                         <td>{{user.LastName || "N/A"}}</td>
                         <td>{{user.Email || "N/A"}}</td>
@@ -65,7 +71,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="empty" ng-hide="model.Users.length">
+            <div class="empty" ng-hide="model.Users.items.length">
                 There are no Users Available in this group yet
             </div>
         </div>
@@ -84,18 +90,18 @@
                 <div class="form-group form-md-line-input">
                     <label class="col-md-3 control-label" for="form_role">User</label>
                     <div class="col-md-7">
-                        
+
                         <select class="form-control" id="form_role" ng-init="model.User = model.Users[0]" ng-model="model.User" ng-options="user.FirstName + ' ' + user.LastName for user in model.Users"></select>
                         <div class="form-control-focus"> </div>
                     </div>
                 </div>
                 @*<div class="form-group form-md-line-input">
-                <label class="col-md-3 control-label" for="form_role">Group</label>
-                <div class="col-md-7">
-                    <select class="form-control" id="form_role" ng-init="model.Group = model.Groups[0]" ng-model="model.Group" ng-options="group.GroupName for group in model.Groups"></select>
-                    <div class="form-control-focus"> </div>
-                </div>
-            </div>*@
+                        <label class="col-md-3 control-label" for="form_role">Group</label>
+                        <div class="col-md-7">
+                            <select class="form-control" id="form_role" ng-init="model.Group = model.Groups[0]" ng-model="model.Group" ng-options="group.GroupName for group in model.Groups"></select>
+                            <div class="form-control-focus"> </div>
+                        </div>
+                    </div>*@
 
                 <div class="modal-footer">
                     <button class="btn default" ng-click="model.Cancel()">Cancel</button>
@@ -105,4 +111,35 @@
         </form>
     </div>
 
+</script>
+
+<script type="text/ng-template" id="uploadUser.html">
+    <form name="form" role="form" class="form-horizontal" ng-submit="model.Ok(form)">
+        <div class="modal-header">
+            <h3 class="modal-title"><i class="fa fa-cloud-upload"></i> Upload Users</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_code">Template</label>
+                    <div class="col-md-7">
+                        <p class="form-control-static">
+                            <a href="/Content/Excel/User.xlsx"><i class="fa fa-cloud-download"></i>Download</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label" for="form_name">Users File</label>
+                    <div class="col-md-7">
+                        <input type="file" class="form-control" file-model="model.QuestionFile" id="file_items" required placeholder="Select Items File" />
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn default" type="reset" ng-click="model.Cancel()">Cancel</button>
+            <button class="btn blue" type="submit">Upload</button>
+        </div>
+    </form>
 </script>

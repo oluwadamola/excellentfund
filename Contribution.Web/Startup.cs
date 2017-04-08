@@ -1,5 +1,5 @@
 ﻿using Contribution.Core.Manager;
-using Contribution.Data;
+using Contribution.Core;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -78,6 +78,7 @@ namespace Contribution.Web
 
                 using (var db = new DataEntities())
                 {
+                    
                     UserManager _userManager = new UserManager(new EntityRepository(db));
                     var validateUser = _userManager.ValidateUser(context.UserName, context.Password);
                     context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
@@ -96,13 +97,13 @@ namespace Contribution.Web
 
                         //Create Extra properties
                         var props = new Dictionary<string, string>
-                    {
-                        { "UserId", validateUser.Result.UserId.ToString() },
-                        { "Email", validateUser.Result.Email },
-                        { "FirstName", validateUser.Result.FirstName },
-                        { "LastName", validateUser.Result.LastName }//,
-                       // { "ImageUrl", validateUser.Result.ImageUrl ?? "" }
-                    };
+                        {
+                            { "UserId", validateUser.Result.UserId.ToString() },
+                            { "Email", validateUser.Result.Email },
+                            { "FirstName", validateUser.Result.FirstName },
+                            { "LastName", validateUser.Result.LastName }//,
+                           // { "ImageUrl", validateUser.Result.ImageUrl ?? "" }
+                        };
 
                         context.Validated(new AuthenticationTicket(identity, new AuthenticationProperties(props)));
                     }

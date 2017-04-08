@@ -1,0 +1,7 @@
+﻿<script id="template/paging/pager.html" type="text/ng-template">
+    <ul class="pagination" ng-show="model.links().length > 1">
+        <li><a style="cursor:pointer" ng-click="model.prev()">&laquo;</a></li>
+        <li ng-class="{active:model.isCurrentPage(item)}" ng-repeat="item in model.links()"><a style="cursor:pointer" ng-click="model.goto(item)">{{item + 1}}</a></li>
+        <li><a style="cursor:pointer" ng-click="model.next()">&raquo;</a></li>
+    </ul>
+</script>

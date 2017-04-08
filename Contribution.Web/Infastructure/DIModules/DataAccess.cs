@@ -1,7 +1,7 @@
 ﻿using Contribution.Core.Interface.Data;
 using Contribution.Core.Interface.Manager;
 using Contribution.Core.Manager;
-using Contribution.Data;
+using Contribution.Core;
 using Ninject.Modules;
 using Ninject.Web.Common;
 using System;
@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Contribution.Data.Interface;
 
 namespace Contribution.Web.Infastructure.DIModules
 {
